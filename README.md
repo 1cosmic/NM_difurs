@@ -3,4 +3,5 @@
 
 Пример приложения
 
-![Screenshot from 2022-10-30 18-36-05](https://user-images.githubusercontent.com/72942713/198884448-63cc66a7-ba34-479d-8d69-aa27d1f134b6.png)
+![Screenshot from 2022-10-30 18-47-09](https://user-images.githubusercontent.com/72942713/198884968-4128ee5a-cad6-4873-8675-5abcfe68065c.png)
+
