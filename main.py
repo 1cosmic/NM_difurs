@@ -8,9 +8,10 @@ import sys
 import numpy
 
 
-detalization = 1000
-startX = 0.0001
-endX = 100
+startX = -5
+endX = 5
+step = 0.1
+
 
 class mainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -19,29 +20,39 @@ class mainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_dialog()
 
         self.ui.setupUi(self.dialog)
+        self.ui.pushButton.clicked.connect(self.drawGraphs)
 
 
     def drawGraphs(self):
 
-        countPoint = (endX - startX) / detalization
-        x = numpy.arange(startX, endX, countPoint)
-        y = []
-        y1 = []
-        y2 = []
+        x = numpy.arange(startX, endX, step)
+        y = m_f.generate_randomPoints(startX, endX, step)
+        y1 = m_f.method_LeftDifference(y, step)
+        y2 = m_f.method_LeftDifference(y1, step)
+        # y2 =
 
-        for i in range(detalization):
-            y.append(m_f.func(x[i]))
-            y1.append(m_f.funcFirstDerivative(x[i]))
-            y2.append(m_f.funcSecondDerivative(x[i]))
+        # for i in range(len(y)):
+        #     y.append(m_f.func(x[i]))
+            # y1.append(m_f.funcFirstDerivative(x[i]))
+            # y2.append(m_f.funcSecondDerivative(x[i]))
+
+        self.ui.graphMain.clear()
+        self.ui.graphFirst.clear()
+        self.ui.graphSecond.clear()
+
 
         self.ui.graphMain.showGrid(1, 1, 1)
-        self.ui.graphMain.setYRange(-5, 5, padding=0)
+        # self.ui.graphMain.setYRange(-5, 5, padding=0)
+        self.ui.graphMain.setTitle("График функции", size='12pt', color='w')
 
         self.ui.graphFirst.showGrid(1, 1, 1)
-        self.ui.graphFirst.setYRange(-5, 5, padding=0)
+        # self.ui.graphFirst.setYRange(-5, 5, padding=0)
+        self.ui.graphFirst.setTitle("График I-порядка", size='12pt', color='w')
 
         self.ui.graphSecond.showGrid(1, 1, 1)
-        self.ui.graphSecond.setYRange(-5, 5, padding=0)
+        # self.ui.graphSecond.setYRange(-5, 5, padding=0)
+        self.ui.graphSecond.setTitle("График II-порядка", size='12pt', color='w')
+
 
         self.ui.graphMain.plot(x, y, pen=(1, 1))
         self.ui.graphFirst.plot(x, y1, pen=(1, 2))
